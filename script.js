@@ -15,25 +15,26 @@
   });
 
   cw1.addEventListener("click", function() {
+    const id = postId.value;
     answer.innerHTML = "Loading...";
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => response.json())
-      .then((array) => {
-        let ul = "<ul>";
 
-        array.forEach((post) => {
-          ul += `
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then((response) => response.json())
+      .then((post) => {
+        answer.innerHTML = `
+          <ul>
             <li>
               ID: ${post.id}<br>
               Tytuł: ${post.title}<br>
               Treść: ${post.body}
-            </li><br>
-          `;
-        });
-
-        ul += "</ul>";
-        answer.innerHTML = ul;
+            </li>
+          </ul>
+        `;
       })
+      .catch((error) => {
+        answer.textContent = "Wystąpił błąd podczas pobierania posta.";
+        console.error(error);
+      });
   });
 
   cw2.addEventListener("click", function() {

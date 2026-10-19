@@ -31,10 +31,6 @@
           </ul>
         `;
       })
-      .catch((error) => {
-        answer.textContent = "Wystąpił błąd podczas pobierania posta.";
-        console.error(error);
-      });
   });
 
   cw2.addEventListener("click", function() {
